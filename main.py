@@ -49,8 +49,8 @@ for mol, order in zip(data[0], odr):
 k = round(data[0][-1] / tmp, 2)  # 속도 상수를 계산하고 소숫점 2번째 자리까지 반올림
 
 # 계산 결과 출력
-print("")
-print("[결과]")
+print('')
+print('[결과]')
 
 print('[반응 차수]')
 print(", ".join(map(str, odr)))
@@ -61,3 +61,17 @@ print(k)
 print('[반응 속도식]')
 text = '*'.join([f'[E{i}]^{order}' for i, order in enumerate(odr)])
 print(f'v = {k} * {text}')
+
+# 새로운 몰농도일 때 속도 계산
+print('')
+print('[반응 속도 계산하기]')
+
+mols = list(map(float, input('새로운 몰농도를 순서대로 입력해주세요: ').split()))
+
+speed = k
+for mol, order in zip(mols, odr):
+    speed *= pow(mol, order)  # [A]^m * [B]^n ... 부분들 계산
+
+print('[결과]')
+mols_text = (", ".join(map(str, mols)))
+print(f'몰농도가 {mols_text}일 때 반응 속도: {speed} M/min')
